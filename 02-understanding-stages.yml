@@ -12,9 +12,10 @@ pool:
 stages:
   - stage: Build
     jobs:
-      - job: FirstBuildJob
+      
+      - job: PredefinedVariables
         steps:
-        - bash: echo FirstBuildJob
+        - bash: echo PredefinedVariables
         - bash: echo Globla Variable - $(PipelineLevelVariable)
         - bash: echo BuildNumber - $(Build.BuildNumber)
         - bash: echo BuildId - $(Build.BuildId)
@@ -23,10 +24,28 @@ stages:
         - bash: echo DefaultWorkingDirectory -  $(Build.DefaultWorkingDirectory)
         - bash: ls -R $(System.DefaultWorkingDirectory)
         - bash: echo ArtifactStagingDirectory -  $(Build.ArtifactStagingDirectory)
-      # - job: SecondBuildJob
-      #   steps:
-      #   - bash: echo SecondBuildJob  
       
+      - job: VersionOfVariousSoftwares
+        steps:
+        - bash: java --version
+        - bash: node --version
+        - bash: python --version
+        - bash: mvn --version  
+      
+      - job: CopyFilesFromDefalutWorkingDirectoryToStagingDirectory
+        steps:
+          - bash: echo Before Copy - ArtifactStagingDirectory -  $(Build.ArtifactStagingDirectory)
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(Build.DefaultWorkingDirectory)'
+              Contents: |
+                **/*.yaml
+                **/*.tf
+              TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        
+          - bash: echo After Copy - ArtifactStagingDirectory -  $(Build.ArtifactStagingDirectory)
+
+
   # - stage: DevDeploy
   #   dependsOn: 
   #     - Build
