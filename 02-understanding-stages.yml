@@ -23,7 +23,7 @@ stages:
     jobs: 
       - job: DevDeployJob
         steps:
-          - bash echo DevDeployJob
+          - bash: echo DevDeployJob
 
   - stage: QADeploy
     jobs:
@@ -35,7 +35,7 @@ stages:
     jobs:
       - job: ProdDeployJob
         steps: 
-          - bash echo ProdDeployJob
+          - bash: echo ProdDeployJob
 
 
 steps:
