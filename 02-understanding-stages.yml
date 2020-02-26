@@ -44,7 +44,11 @@ stages:
               TargetFolder: '$(Build.ArtifactStagingDirectory)'
         
           - bash: echo After Copy - ArtifactStagingDirectory -  $(Build.ArtifactStagingDirectory)
-
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
 
   # - stage: DevDeploy
   #   dependsOn: 
