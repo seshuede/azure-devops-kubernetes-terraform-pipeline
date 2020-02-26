@@ -25,25 +25,25 @@ stages:
         - bash: ls -R $(System.DefaultWorkingDirectory)
         - bash: echo ArtifactStagingDirectory -  $(Build.ArtifactStagingDirectory)
       
-      # - job: VersionOfVariousSoftwares
-      #   steps:
-        - bash: java --version
+      - job: VersionOfVariousSoftwares
+        steps:
+        - bash: java -version
         - bash: node --version
         - bash: python --version
         - bash: mvn --version  
       
-      # - job: CopyFilesFromDefalutWorkingDirectoryToStagingDirectory
-      #   steps:
-        - bash: echo Before Copy - ArtifactStagingDirectory -  $(Build.ArtifactStagingDirectory)
-        - task: CopyFiles@2
-          inputs:
+      - job: CopyFilesFromDefalutWorkingDirectoryToStagingDirectory
+        steps:
+          - bash: echo Before Copy - ArtifactStagingDirectory -  $(Build.ArtifactStagingDirectory)
+          - task: CopyFiles@2
+            inputs:
               SourceFolder: '$(Build.DefaultWorkingDirectory)'
               Contents: |
                 **/*.yaml
                 **/*.tf
               TargetFolder: '$(Build.ArtifactStagingDirectory)'
         
-        - bash: echo After Copy - ArtifactStagingDirectory -  $(Build.ArtifactStagingDirectory)
+          - bash: echo After Copy - ArtifactStagingDirectory -  $(Build.ArtifactStagingDirectory)
 
 
   # - stage: DevDeploy
