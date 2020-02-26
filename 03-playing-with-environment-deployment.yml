@@ -4,13 +4,13 @@ trigger:
 strategy:
   matrix:
     linux:
-      operationSystem: 'ubuntu-latest'
+      operatingSystem: 'ubuntu-latest'
     mac:
-      operationgSystem: 'macos-latest'
+      operatingSystem: 'macos-latest'
 
 pool:
   vmImage: $(operatingSystem)
 
 steps:
-- script: echo Runnig on $(operatingSystem)
+- script: echo Runnig on ${operatingSystem}
   displayName: 'Run a one-line script'
