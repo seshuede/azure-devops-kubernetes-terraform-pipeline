@@ -15,7 +15,7 @@ stages:
       - job: FirstBuildJob
         steps:
         - bash: echo FirstBuildJob
-        - bash: echo ${PipelineLevelVariable}
+        - bash: echo $(PipelineLevelVariable)
       - job: SecondBuildJob
         steps:
         - bash: echo SecondBuildJob  
@@ -30,8 +30,8 @@ stages:
       - job: DevDeployJob
         steps:
           - bash: echo DevDeployJob
-          - bash: echo env_name ${environment} 
-          - bash: echo stage_type ${stagetype}
+          - bash: echo env_name $(environment) 
+          - bash: echo stage_type $(stagetype)
 
   - stage: QADeploy
     dependsOn:
@@ -42,7 +42,7 @@ stages:
       - job:  QADeployJob
         steps:
           - bash: echo QADeplyJob
-          - bash: echo env_name ${environment}
+          - bash: echo env_name $(environment)
 
   - stage: ProdDeploy
     dependsOn:
@@ -54,4 +54,4 @@ stages:
       - job: ProdDeployJob
         steps: 
           - bash: echo ProdDeployJob
-          - bash: echo env_name ${environment}
+          - bash: echo env_name $(environment)
