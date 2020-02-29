@@ -23,7 +23,7 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'nede1-docker-hub'
+        containerRegistry: 'nede1dockerhub'
         repository: 'nede1/currency-exchange-devops'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
@@ -55,7 +55,7 @@ stages:
     - task: KubernetesManifest@0
       inputs:
         action: 'deploy'
-        kubernetesServiceConnection: 'azure-kubernetes-connection'
+        kubernetesServiceConnection: 'azure-kuberneter-cluster-connection'
         namespace: 'default'
         manifests: '$(System.ArtifactsDirectory)/configuration/kubernetes/deployment.yaml'
         containers: 'nede1/currency-exchange-devops:$(tag)'
