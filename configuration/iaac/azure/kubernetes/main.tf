@@ -1,8 +1,15 @@
+# 1. Resource Group
 resource "azurerm_resource_group" "resource_group" {
   name     = "${var.resource_group}_${var.environment}"
   location = var.location
 }
 
+provider "azurerm" {
+  version = "=2.0.0"
+  features {}
+}
+
+# 2. Cluster
 resource "azurerm_kubernetes_cluster" "terraform-k8s" {
   name                = "${var.cluster_name}_${var.environment}"
   location            = azurerm_resource_group.resource_group.location
@@ -23,6 +30,7 @@ resource "azurerm_kubernetes_cluster" "terraform-k8s" {
     vm_size         = "Standard_DS1_v2"
   }
 
+# 4. K8s Cluster has to talk to azure, so need service_principal
   service_principal {
     client_id     = var.client_id
     client_secret = var.client_secret
@@ -33,6 +41,7 @@ resource "azurerm_kubernetes_cluster" "terraform-k8s" {
   }
 }
 
+# 3. State stores in Storage Count
 terraform {
   backend "azurerm" {
     # storage_account_name="<<storage_account_name>>" #OVERRIDE in TERRAFORM init
