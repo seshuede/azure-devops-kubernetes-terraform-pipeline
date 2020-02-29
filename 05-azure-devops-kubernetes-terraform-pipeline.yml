@@ -25,7 +25,7 @@ steps:
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
     backendAzureRmResourceGroupLocation: 'westeurope'
     backendAzureRmStorageAccountName: 'storageacctnede1'
-    backendAzureRmContainerName: 'storageacctrangacontainer'
+    backendAzureRmContainerName: 'storageacctnede1container'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
 
 # To run terraform Scripts
