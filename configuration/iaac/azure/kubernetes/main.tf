@@ -4,11 +4,6 @@ resource "azurerm_resource_group" "resource_group" {
   location = var.location
 }
 
-provider "azurerm" {
-  version = "=2.0.0"
-  features {}
-}
-
 # 2. Cluster
 resource "azurerm_kubernetes_cluster" "terraform-k8s" {
   name                = "${var.cluster_name}_${var.environment}"
